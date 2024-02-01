@@ -1,0 +1,83 @@
+#include <iostream>
+#include <vector>
+	
+using namespace std;
+
+void printBoard(const vector<vector<char>>& board) {
+    for (const auto& row : board) {
+        for (char cell : row) {
+            cout << cell << " ";
+        }
+        cout << endl;
+    }
+}
+
+bool isBoardFull(const vector<vector<char>>& board) {
+    for (const auto& row : board) {
+        for (char cell : row) {
+            if (cell == ' ')
+                return false; // Board is not full
+        }
+    }
+    return true; // Board is full
+}
+
+bool checkWin(const vector<vector<char>>& board, char player) {
+    // Check rows and columns
+    for (int i = 0; i < 3; ++i) {
+        if ((board[i][0] == player && board[i][1] == player && board[i][2] == player) ||
+            (board[0][i] == player && board[1][i] == player && board[2][i] == player)) {
+            return true; // Win
+        }
+    }
+
+    // Check diagonals
+    if ((board[0][0] == player && board[1][1] == player && board[2][2] == player) ||
+        (board[0][2] == player && board[1][1] == player && board[2][0] == player)) {
+        return true; // Win
+    }
+
+    return false; // No win
+}
+
+int main() {
+    // Calculator part
+    double num1, num2, result;
+    char operation;
+
+    cout << "Enter first number: ";
+    cin >> num1;
+
+    cout << "Enter second number: ";
+    cin >> num2;
+
+    cout << "Choose operation (+, -, *, /): ";
+    cin >> operation;
+
+    switch (operation) {
+        case '+':
+            result = num1 + num2;
+            break;
+        case '-':
+            result = num1 - num2;
+            break;
+        case '*':
+            result = num1 * num2;
+            break;
+        case '/':
+            if (num2 != 0) {
+                result = num1 / num2;
+            } else {
+                cout << "Error! Division by zero is not allowed." << endl;
+                return 1; // Exit with an error code
+            }
+            break;
+        default:
+            cout << "Invalid operation. Please choose +, -, *, or /." << endl;
+            return 1; // Exit with an error code
+    }
+
+    cout << "Result: " << result << endl;
+}
+    
+
